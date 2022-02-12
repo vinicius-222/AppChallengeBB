@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import C from './styled';
 import { connect } from 'react-redux';
 import { MoneyMask, MoedaAmericana } from '../../components/mask';
 import ListAction from '../../components/listAction';
 import ModalMessage from '../../components/modalMessage';
+
 const Rescue = (props) => {
     const [valotTotalRegate, setValorTotalResgate] = useState(0.00);
     const [modalVisible, setModalVisible] = useState(false);
-    const [modalTitle, setModalTitle] = useState('');
+    const [listValueInvalid, setListValueInvalid] = useState([]);
 
-    const onCalcTotalResgate = (v,k) => {
+    const onCalcTotalResgate = (v,k,s) => {
         props.setChangeAcoes({
             'key':k,
-            'VlResgate':MoedaAmericana(v)
+            'VlResgate':parseFloat(MoedaAmericana(v)),
+            'VlSaldo':parseFloat(MoedaAmericana(s))
         }) 
         SomaValoresTotais()
         .then((r)=>{
@@ -31,49 +33,66 @@ const Rescue = (props) => {
         return promise;
     }
 
+    const VerifyActions = () => {
+        let promise = new Promise((resolve, reject) =>{
+            let arr = [];
+            for (let i in props.acoes){
+                if(props.acoes[i].VlResgate > props.acoes[i].VlSaldo){
+                    arr.push(props.acoes[i])
+                }
+            }
+            resolve(arr);
+        })
+        return promise;
+    }
+
     const handleModalClick = () => {
-        setModalVisible(!modalVisible);
+        VerifyActions()
+        .then((r)=>{
+            setListValueInvalid(r);
+            setModalVisible(!modalVisible);
+        })
     }
 
     return(
         <C.Container>
             <ModalMessage 
-                title={modalTitle}
                 visible={modalVisible}
                 visibleAction={handleModalClick}
                 clickAction={handleModalClick}
+                listValueInvalid={listValueInvalid}
             />
-            <C.HeaderInvestArea>
-                <C.HeaderInfoInvestText>DADOS DO INVESTIMENTO</C.HeaderInfoInvestText>
-            </C.HeaderInvestArea>
-            <C.HeaderDetailInvestArea>
-                <C.HeaderDetailInvestAreaItem>
-                    <C.HeaderDetailInvesTextItem>Nome</C.HeaderDetailInvesTextItem>
-                    <C.HeaderDetailInvesTextItem>{props.nome}</C.HeaderDetailInvesTextItem>
-                </C.HeaderDetailInvestAreaItem>
-                <C.HeaderDetailInvestAreaItem>
-                    <C.HeaderDetailInvesTextItem>Saldo Total Dispnivel</C.HeaderDetailInvesTextItem>
-                    <C.HeaderDetailInvesTextItem>{`R$ ${MoneyMask(parseFloat(props.saldoTotal).toFixed(2))}`}</C.HeaderDetailInvesTextItem>
-                </C.HeaderDetailInvestAreaItem>
-            </C.HeaderDetailInvestArea>
-            <C.HeaderInvestArea>
-                <C.HeaderInfoInvestText>RESGATE DO SEU JEITO</C.HeaderInfoInvestText>
-            </C.HeaderInvestArea>
+            <C.HeaderRescueArea>
+                <C.HeaderInfoRescueText>DADOS DO INVESTIMENTO</C.HeaderInfoRescueText>
+            </C.HeaderRescueArea>
+            <C.HeaderDetailRescueArea>
+                <C.HeaderDetailRescueAreaItem>
+                    <C.HeaderDetailRescueextItem>Nome</C.HeaderDetailRescueextItem>
+                    <C.HeaderDetailRescueextItem>{props.nome}</C.HeaderDetailRescueextItem>
+                </C.HeaderDetailRescueAreaItem>
+                <C.HeaderDetailRescueAreaItem>
+                    <C.HeaderDetailRescueextItem>Saldo Total Dispnivel</C.HeaderDetailRescueextItem>
+                    <C.HeaderDetailRescueextItem>{`R$ ${MoneyMask(parseFloat(props.saldoTotal).toFixed(2))}`}</C.HeaderDetailRescueextItem>
+                </C.HeaderDetailRescueAreaItem>
+            </C.HeaderDetailRescueArea>
+            <C.HeaderRescueArea>
+                <C.HeaderInfoRescueText>RESGATE DO SEU JEITO</C.HeaderInfoRescueText>
+            </C.HeaderRescueArea>
             <C.DetailListActions 
                 data={props.acoes}
                 renderItem={(item)=> {
                     return(
-                        <ListAction data={item} valor={props.saldoTotal} onCalcTotalResgate={(v,k)=>onCalcTotalResgate(v,k)}/>
+                        <ListAction data={item} valor={props.saldoTotal} onCalcTotalResgate={(v,k,s)=>onCalcTotalResgate(v,k,s)}/>
                     )
                 }}
             />
-             <C.BottomInvestArea>
-                <C.BottomInvestText>Valor total a resgatar</C.BottomInvestText>
-                <C.BottomInvestText>{`R$  ${MoneyMask(valotTotalRegate.toFixed(2))}`}</C.BottomInvestText>
-            </C.BottomInvestArea>
-            <C.BottomInvestButton onPress={()=>handleModalClick()}>
-                <C.BottomInvestButtonText>CONFIRMAR RESGATE</C.BottomInvestButtonText>
-            </C.BottomInvestButton>
+             <C.BottomRescueArea>
+                <C.BottomRescueText>Valor total a resgatar</C.BottomRescueText>
+                <C.BottomRescueText>{`R$  ${MoneyMask(valotTotalRegate.toFixed(2))}`}</C.BottomRescueText>
+            </C.BottomRescueArea>
+            <C.BottomRescueButton onPress={()=>handleModalClick()}>
+                <C.BottomRescueButtonText>CONFIRMAR RESGATE</C.BottomRescueButtonText>
+            </C.BottomRescueButton>
         </C.Container>
     )
 }

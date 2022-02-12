@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
         break;
         case 'CHANGE_ACOES':
             arr[action.payload.acoes.key].VlResgate = action.payload.acoes.VlResgate;
+            arr[action.payload.acoes.key].VlSaldo = action.payload.acoes.VlSaldo;
             state.acoes = [];
             return { ...state, acoes:state.acoes.concat(arr)};
         break;

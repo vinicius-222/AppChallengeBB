@@ -2012,6 +2012,11 @@
   dependencies:
     "type-fest" "^0.21.3"
 
+"ansi-font@0.0.2":
+  "integrity" "sha1-iQMBvVhBRi/TnAt3Ca/R9SUUMzE="
+  "resolved" "https://registry.npmjs.org/ansi-font/-/ansi-font-0.0.2.tgz"
+  "version" "0.0.2"
+
 "ansi-fragments@^0.2.1":
   "integrity" "sha512-DykbNHxuXQwUDRv5ibc2b0x7uw7wmwOGLBUd5RmaQ5z8Lhx19vwvKV+FAsM5rEA6dEcHxX+/Ad5s9eF2k2bB+w=="
   "resolved" "https://registry.npmjs.org/ansi-fragments/-/ansi-fragments-0.2.1.tgz"
@@ -7346,6 +7351,13 @@
     "@istanbuljs/schema" "^0.1.2"
     "glob" "^7.1.4"
     "minimatch" "^3.0.4"
+
+"test@^0.6.0":
+  "integrity" "sha1-WYasRF7Bd1QyJRLRBLoyyKY+k44="
+  "resolved" "https://registry.npmjs.org/test/-/test-0.6.0.tgz"
+  "version" "0.6.0"
+  dependencies:
+    "ansi-font" "0.0.2"
 
 "text-table@^0.2.0":
   "integrity" "sha1-f17oI66AUgfACvLfSoTsP8+lcLQ="

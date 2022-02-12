@@ -24,4 +24,12 @@ export default {
     List: styled.FlatList`
     
     `,
+    LoadingArea: styled.View`
+        height:100%;
+        justify-content:center;
+        align-items:center;
+    `,
+    LoadingIcon: styled.ActivityIndicator`
+        margin-top:50px;
+    `,
 };

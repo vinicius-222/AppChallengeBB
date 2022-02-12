@@ -55,7 +55,7 @@ const ListAction = (props) => {
         }else{
             setMessage(false);
         }
-        props.onCalcTotalResgate(valorResgate, props.data.index);
+        props.onCalcTotalResgate(valorResgate, props.data.index, valorAcao);
     },[valorResgate])
 
     return(

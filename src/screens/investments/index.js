@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import C from './styled';
-import { useNavigation } from '@react-navigation/native';
 import useAPI from '../../useAPI';
 import ListInvest from '../../components/listInvest'
 
@@ -33,6 +32,11 @@ export default () => {
                         )
                     }}
                 />
+            }
+            {!listInvest &&
+                <C.LoadingArea>
+                    <C.LoadingIcon size="large" color="#FF0000"/>
+                </C.LoadingArea>
             }
         </C.Container>
     )
