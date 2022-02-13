@@ -112,7 +112,7 @@ const ModalMessage = (props) => {
                             {stValueInvalid &&
                                 <InfoAreaDetail>
                                 {props.listValueInvalid.map((i,k)=>(
-                                    <InfoText key={k}>{`${i.nome.slice(-7).replace('(','').replace(')','')}: Valor máximo de R$ ${MoneyMaskBR(i.VlSaldo)}`}</InfoText>
+                                    <InfoText key={k}>{`${i.nome.slice(i.nome.indexOf('(')+1, i.nome.indexOf(')'))}: Valor máximo de R$ ${MoneyMaskBR(i.VlSaldo)}`}</InfoText>
                                 ))}
                                 </InfoAreaDetail>
                             }
@@ -128,3 +128,4 @@ const ModalMessage = (props) => {
 }
 
 export default ModalMessage;
+//i.nome.slice(-7).replace('(','').replace(')','')
