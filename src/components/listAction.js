@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
-import { MoneyMask, MoedaAmericana } from '../components/mask';
+import { MoneyMaskBR, MoneyMaskUS } from '../components/mask';
 
-const DetailInvestArea = styled.View`
+const DetailActionArea = styled.View`
     height:180px;
     background-color:#FFF;
     border-bottom-width:20px;
@@ -40,17 +40,17 @@ const DetailActionRescueTextMessage = styled.Text`
 
 
 const ListAction = (props) => {
-    const [valorResgate, setValorResgate] = useState(MoneyMask(0.00));
+    const [valorResgate, setValorResgate] = useState(MoneyMaskBR(0.00));
     const [valorAcao, setValorAcao] = useState(0.00);
     const [message, setMessage] = useState(false);
 
     useEffect(()=>{
         let value = parseFloat(props.data.item.percentual) * parseFloat(props.valor) / 100;
-        setValorAcao(MoneyMask(value.toFixed(2)));
+        setValorAcao(MoneyMaskBR(value.toFixed(2)));
     },[])
 
     useEffect(()=>{
-        if(parseFloat(MoedaAmericana(valorResgate)) > parseFloat(MoedaAmericana(valorAcao))){
+        if(parseFloat(MoneyMaskUS(valorResgate)) > parseFloat(MoneyMaskUS(valorAcao))){
             setMessage(true);
         }else{
             setMessage(false);
@@ -59,7 +59,7 @@ const ListAction = (props) => {
     },[valorResgate])
 
     return(
-        <DetailInvestArea>
+        <DetailActionArea>
             <DetailActionInfoArea>
                 <DetailActionText>Ação</DetailActionText>
                 <DetailActionText>{props.data.item.nome}</DetailActionText>
@@ -73,15 +73,15 @@ const ListAction = (props) => {
                 <DetailActionRescueTextInput 
                     keyboardType={'numeric'}
                     value={`R$ ${valorResgate}`}
-                    onChangeText={(e)=>setValorResgate(MoneyMask(e))}
+                    onChangeText={(e)=>setValorResgate(MoneyMaskBR(e))}
                 />
             </DetailActionRescueArea>
             <DetailActionRescueArea>
                 {message &&
-                    <DetailActionRescueTextMessage>{`Valor nao pode ser maior que ${MoneyMask(valorAcao)}`}</DetailActionRescueTextMessage>
+                    <DetailActionRescueTextMessage>{`Valor nao pode ser maior que ${MoneyMaskBR(valorAcao)}`}</DetailActionRescueTextMessage>
                 }
             </DetailActionRescueArea>
-        </DetailInvestArea>
+        </DetailActionArea>
     )
 }
 

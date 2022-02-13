@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import C from './styled';
 import { connect } from 'react-redux';
-import { MoneyMask, MoedaAmericana } from '../../components/mask';
+import { MoneyMaskBR, MoneyMaskUS } from '../../components/mask';
 import ListAction from '../../components/listAction';
 import ModalMessage from '../../components/modalMessage';
 
@@ -13,8 +13,8 @@ const Rescue = (props) => {
     const onCalcTotalResgate = (v,k,s) => {
         props.setChangeAcoes({
             'key':k,
-            'VlResgate':parseFloat(MoedaAmericana(v)),
-            'VlSaldo':parseFloat(MoedaAmericana(s))
+            'VlResgate':parseFloat(MoneyMaskUS(v)),
+            'VlSaldo':parseFloat(MoneyMaskUS(s))
         }) 
         SomaValoresTotais()
         .then((r)=>{
@@ -72,7 +72,7 @@ const Rescue = (props) => {
                 </C.HeaderDetailRescueAreaItem>
                 <C.HeaderDetailRescueAreaItem>
                     <C.HeaderDetailRescueextItem>Saldo Total Dispnivel</C.HeaderDetailRescueextItem>
-                    <C.HeaderDetailRescueextItem>{`R$ ${MoneyMask(parseFloat(props.saldoTotal).toFixed(2))}`}</C.HeaderDetailRescueextItem>
+                    <C.HeaderDetailRescueextItem>{`R$ ${MoneyMaskBR(parseFloat(props.saldoTotal).toFixed(2))}`}</C.HeaderDetailRescueextItem>
                 </C.HeaderDetailRescueAreaItem>
             </C.HeaderDetailRescueArea>
             <C.HeaderRescueArea>
@@ -88,7 +88,7 @@ const Rescue = (props) => {
             />
              <C.BottomRescueArea>
                 <C.BottomRescueText>Valor total a resgatar</C.BottomRescueText>
-                <C.BottomRescueText>{`R$  ${MoneyMask(valotTotalRegate.toFixed(2))}`}</C.BottomRescueText>
+                <C.BottomRescueText>{`R$  ${MoneyMaskBR(valotTotalRegate.toFixed(2))}`}</C.BottomRescueText>
             </C.BottomRescueArea>
             <C.BottomRescueButton onPress={()=>handleModalClick()}>
                 <C.BottomRescueButtonText>CONFIRMAR RESGATE</C.BottomRescueButtonText>

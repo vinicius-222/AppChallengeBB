@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { MoneyMask } from '../components/mask';
+import { MoneyMaskBR } from '../components/mask';
 import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
@@ -42,7 +42,7 @@ const ListInvest = (props) =>{
         <ListArea onPress={handleListArea} carencia={props.data.indicadorCarencia}>
             <ListAreaInfo>
                 <ListInfo carencia={props.data.indicadorCarencia}>{props.data.nome}</ListInfo>
-                <ListInfo carencia={props.data.indicadorCarencia}>{`R$ ${MoneyMask(parseFloat(props.data.saldoTotal).toFixed(2))}`}</ListInfo>
+                <ListInfo carencia={props.data.indicadorCarencia}>{`R$ ${MoneyMaskBR(parseFloat(props.data.saldoTotal).toFixed(2))}`}</ListInfo>
             </ListAreaInfo>
             <ListDetail>{props.data.objetivo}</ListDetail>
         </ListArea>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState }  from 'react';
-import { MoneyMask } from '../components/mask';
+import { MoneyMaskBR } from '../components/mask';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -112,7 +112,7 @@ const ModalMessage = (props) => {
                             {stValueInvalid &&
                                 <InfoAreaDetail>
                                 {props.listValueInvalid.map((i,k)=>(
-                                    <InfoText key={k}>{`${i.nome.slice(-7).replace('(','').replace(')','')}: Valor máximo de R$ ${MoneyMask(i.VlSaldo)}`}</InfoText>
+                                    <InfoText key={k}>{`${i.nome.slice(-7).replace('(','').replace(')','')}: Valor máximo de R$ ${MoneyMaskBR(i.VlSaldo)}`}</InfoText>
                                 ))}
                                 </InfoAreaDetail>
                             }

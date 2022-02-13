@@ -1,4 +1,4 @@
-export const MoneyMask = value => {
+export const MoneyMaskBR = value => {
 		let t = value.toString();
 		t = t.replace(/\D/g,'');
 		t = (t/100).toFixed(2) + '';
@@ -8,7 +8,7 @@ export const MoneyMask = value => {
 	return t;
 }
 
-export const MoedaAmericana = value => {
+export const MoneyMaskUS = value => {
     	let t = value.toString();
 		t = t.replace(/\D/g,'');
 		t = (t/100).toFixed(2) + '';
