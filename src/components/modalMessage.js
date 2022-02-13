@@ -128,4 +128,3 @@ const ModalMessage = (props) => {
 }
 
 export default ModalMessage;
-//i.nome.slice(-7).replace('(','').replace(')','')
